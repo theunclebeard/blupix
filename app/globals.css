@@ -1,0 +1,126 @@
+@import "tailwindcss";
+
+:root {
+  --font-pixel: 'Press Start 2P', monospace;
+  --blu-blue: #4b9fe1;
+  --blu-dark: #0a1628;
+  --blu-mid: #12213a;
+  --blu-border: #1e3a5f;
+  --blu-pixel-bg: #0d1c30;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: system-ui, -apple-system, sans-serif;
+  background-color: var(--blu-dark);
+  color: white;
+}
+
+.font-pixel {
+  font-family: var(--font-pixel);
+}
+
+/* Pixel checkerboard background — matches blupix.app merge preview */
+.checkerboard {
+  background-color: #1a2a3a;
+  background-image:
+    linear-gradient(45deg, #12202e 25%, transparent 25%),
+    linear-gradient(-45deg, #12202e 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #12202e 75%),
+    linear-gradient(-45deg, transparent 75%, #12202e 75%);
+  background-size: 16px 16px;
+  background-position: 0 0, 0 8px, 8px -8px, -8px 0px;
+}
+
+/* Pixel stat bar */
+.stat-bar {
+  height: 8px;
+  background: #1e3a5f;
+  border: 1px solid #2a4a7f;
+}
+
+.stat-bar-fill {
+  height: 100%;
+  background: var(--blu-blue);
+  transition: width 0.6s ease;
+}
+
+/* ── Animations ──────────────────────────────────────────────────────────── */
+
+/* Pulse ring — expands outward from sprite while agent is streaming */
+@keyframes pulse-ring {
+  0%   { transform: scale(1);    opacity: 0.8; }
+  70%  { transform: scale(1.18); opacity: 0.2; }
+  100% { transform: scale(1.22); opacity: 0;   }
+}
+
+.animate-pulse-ring::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: inherit;
+  border: 2px solid var(--blu-blue);
+  animation: pulse-ring 1.2s ease-out infinite;
+  pointer-events: none;
+}
+
+/* Bob — gentle float used for lonely sprite */
+@keyframes bob {
+  0%, 100% { transform: translateY(0);    }
+  50%       { transform: translateY(-8px); }
+}
+
+.animate-bob {
+  animation: bob 2.6s ease-in-out infinite;
+}
+
+/* Shimmer — gold sweep for T4 borders */
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position:  200% center; }
+}
+
+.animate-shimmer {
+  background: linear-gradient(
+    90deg,
+    #b45309 0%,
+    #fbbf24 40%,
+    #fef3c7 50%,
+    #fbbf24 60%,
+    #b45309 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 2.4s linear infinite;
+}
+
+/* T4 border shimmer — applied to the wrapper div */
+@keyframes border-shimmer {
+  0%   { border-color: #b45309; box-shadow: 0 0 0px #fbbf2400; }
+  50%  { border-color: #fbbf24; box-shadow: 0 0 8px #fbbf2466; }
+  100% { border-color: #b45309; box-shadow: 0 0 0px #fbbf2400; }
+}
+
+.animate-t4-border {
+  animation: border-shimmer 2.4s ease-in-out infinite;
+}
+
+/* Donor dissolve — applied to burned sprite wrappers */
+@keyframes donor-dissolve {
+  0%   { opacity: 1;   filter: saturate(1)   brightness(1); }
+  100% { opacity: 0.4; filter: saturate(0.1) brightness(0.6); }
+}
+
+.donor-sprite {
+  animation: donor-dissolve 0.8s ease-out forwards;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--blu-dark); }
+::-webkit-scrollbar-thumb { background: var(--blu-border); border-radius: 3px; }
