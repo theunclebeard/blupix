@@ -93,3 +93,5 @@ Blupets contracts on Ethereum mainnet — [blupix.app](https://blupix.app).
 - Supply pyramid dashboard
 - Shareable episode replay cards
 - Vercel OG image generation for T4 share cards
+
+<img width="1536" height="1024" alt="image" src="https://github.com/user-attachments/assets/2bcdc8ef-a1b9-487f-ab5f-3787d618df08" />
